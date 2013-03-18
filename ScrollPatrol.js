@@ -24,7 +24,7 @@ ScrollPatrol.prototype.add = function( input ){
 };
 
 ScrollPatrol.prototype.check = function( event ){
-	var scroll_position = window.scrollY;
+	var scroll_position = ( window.pageYOffset !== undefined ) ? window.pageYOffset : ( document.documentElement || document.body.parentNode || document.body ).scrollTop;
 	var min, max;
 	for( var i = 0, n; n = this.listeners[i]; i += 1 ){
 		min = n.element.offsetTop - this.offset;
