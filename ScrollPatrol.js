@@ -16,12 +16,23 @@
 		}
 	}
 
+	ScrollPatrol.prototype.getOffsetTop = function( element ){
+		var offset = 0;
+		if( element.offsetParent ){
+			do {
+				offset += element.offsetTop;
+				element = element.offsetParent;
+			} while ( element );
+		}
+		offset = Math.max( offset, 0 );
+		return offset;
+	};
+
 	ScrollPatrol.prototype.add = function( input ){
-		var element = document.getElementById( input.id );
 		var enter = input.enter || function(){};
 		var leave = input.leave || function(){};
 		this.listeners.push( {
-			element: element,
+			element: input.element,
 			enter: this.createBreakerFunction( enter ),
 			leave: this.createBreakerFunction( leave )
 		} );
@@ -32,7 +43,7 @@
 		var scroll_position = ( window.pageYOffset !== undefined ) ? window.pageYOffset : ( document.documentElement || document.body.parentNode || document.body ).scrollTop;
 		var min, max;
 		for( var i = 0, n; n = this.listeners[i]; i += 1 ){
-			min = n.element.offsetTop - this.offset;
+			min = this.getOffsetTop( n.element ) - this.offset;
 			max = min + n.element.offsetHeight;
 			if( scroll_position >= min && scroll_position <= max ){
 				n.leave.reset();

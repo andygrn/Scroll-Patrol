@@ -65,7 +65,7 @@
 	<script>
 		var scroll_patrol = new ScrollPatrol( 150 ); // offset in px
 		scroll_patrol.add( {
-			id: 'section1',
+			element: document.getElementById( 'section1' ),
 			enter: function( element, scroll_position ){
 				console.log( 'entered section 1' );
 			},
@@ -74,7 +74,7 @@
 			}
 		} );
 		scroll_patrol.add( {
-			id: 'section2',
+			element: document.getElementById( 'section2' ),
 			enter: function( element, scroll_position ){
 				console.log( 'entered section 2' );
 			},
@@ -83,7 +83,7 @@
 			}
 		} );
 		scroll_patrol.add( {
-			id: 'section3',
+			element: document.getElementById( 'section3' ),
 			enter: function( element, scroll_position ){
 				console.log( 'entered section 3' );
 			},
